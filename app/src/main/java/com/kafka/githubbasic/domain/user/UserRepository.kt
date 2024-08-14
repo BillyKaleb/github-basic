@@ -8,4 +8,6 @@ interface UserRepository {
     suspend fun getUser(): Flow<List<UserListModel>>
 
     suspend fun searchUser(keyword: String): Flow<List<UserListModel>>
+
+    suspend fun getUserDetails(username: String): Flow<UserListModel>
 }

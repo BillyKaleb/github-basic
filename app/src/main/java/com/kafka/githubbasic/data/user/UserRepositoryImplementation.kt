@@ -34,4 +34,17 @@ class UserRepositoryImplementation @Inject constructor(
             }
         }
     }
+
+    override suspend fun getUserDetails(username: String): Flow<UserListModel> {
+        return networkUserDataSource.getUserDetails(username).map { detail ->
+            UserListModel(
+                name = detail.login,
+                id = detail.id,
+                avatarUrl = detail.avatar_url,
+                fullname = detail.name,
+                follower = detail.followers,
+                following = detail.following
+            )
+        }
+    }
 }
