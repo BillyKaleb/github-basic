@@ -51,7 +51,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         viewModel.viewState.observe(viewLifecycleOwner) {
             when (it) {
                 is UserViewState.Success -> {
-                    userAdapter.addList(it.data.listResponse)
+                    userAdapter.submitList(it.data.listResponse)
                 }
 
                 is UserViewState.ErrorNetwork -> {
