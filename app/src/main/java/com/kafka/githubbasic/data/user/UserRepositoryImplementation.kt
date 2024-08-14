@@ -54,9 +54,9 @@ class UserRepositoryImplementation @Inject constructor(
             it.map { repoDetail ->
                 RepositoryListModel(
                     name = repoDetail.name,
-                    language = repoDetail.language ?: "",
+                    language = repoDetail.language,
                     starCount = repoDetail.stargazers_count,
-                    description = repoDetail.description ?: "",
+                    description = repoDetail.description,
                     url = repoDetail.html_url
                 )
             }

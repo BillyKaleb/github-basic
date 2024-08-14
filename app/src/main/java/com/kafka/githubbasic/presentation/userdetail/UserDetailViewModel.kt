@@ -39,9 +39,9 @@ class UserDetailViewModel @Inject constructor(
             _viewState.value = UserDetailsViewState.SuccessLoadRepo(it.map { repositoryModel ->
                 UserRepoFragmentModel(
                     repositoryModel.name,
-                    repositoryModel.language,
+                    repositoryModel.language ?: "",
                     repositoryModel.starCount,
-                    repositoryModel.description,
+                    repositoryModel.description ?: "",
                     repositoryModel.url
                 )
             })
