@@ -22,4 +22,16 @@ class UserRepositoryImplementation @Inject constructor(
             }
         }
     }
+
+    override suspend fun searchUser(keyword: String): Flow<List<UserListModel>> {
+        return networkUserDataSource.searchUsers(keyword).map {
+            it.map { userListResponse ->
+                UserListModel(
+                    name = userListResponse.login,
+                    id = userListResponse.id,
+                    avatarUrl = userListResponse.avatar_url
+                )
+            }
+        }
+    }
 }

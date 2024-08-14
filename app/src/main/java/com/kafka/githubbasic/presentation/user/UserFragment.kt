@@ -42,6 +42,10 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 is UserViewState.Loading -> {
                     // TODO add loading state
                 }
+
+                is UserViewState.SuccessRepopulate -> {
+                    userAdapter.submitList(it.data.listResponse)
+                }
             }
         }
     }

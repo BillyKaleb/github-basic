@@ -1,6 +1,5 @@
 package com.kafka.githubbasic.data.user.datasources
 
-import com.kafka.githubbasic.BuildConfig
 import com.kafka.githubbasic.data.user.UserService
 import com.kafka.githubbasic.data.user.model.UserListResponseModel
 import kotlinx.coroutines.flow.Flow
@@ -13,5 +12,9 @@ class NetworkUserDataSource @Inject constructor(
 
     suspend fun getUsers(): Flow<List<UserListResponseModel>> {
         return flow { emit(userService.getUsers()) }
+    }
+
+    suspend fun searchUsers(keyword: String): Flow<List<UserListResponseModel>> {
+        return flow { emit(userService.searchUsers(keyword)) }
     }
 }

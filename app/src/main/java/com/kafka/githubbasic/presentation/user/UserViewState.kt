@@ -10,5 +10,7 @@ sealed class UserViewState {
 
     data class Success(val data: UserFragmentModel) : UserViewState()
 
+    data class SuccessRepopulate(val data: UserFragmentModel): UserViewState()
+
     data class ErrorNetwork(val throwable: Throwable) : UserViewState()
 }

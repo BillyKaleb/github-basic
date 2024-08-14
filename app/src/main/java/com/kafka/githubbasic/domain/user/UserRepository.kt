@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
 
     suspend fun getUser(): Flow<List<UserListModel>>
+
+    suspend fun searchUser(keyword: String): Flow<List<UserListModel>>
 }
