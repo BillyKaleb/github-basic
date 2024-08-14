@@ -46,7 +46,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
                     }
                 }
 
-                is UserDetailsViewState.SuccessRepopulate -> {
+                is UserDetailsViewState.SuccessLoadRepo -> {
 
                 }
             }

@@ -2,6 +2,7 @@ package com.kafka.githubbasic.data.user
 
 import com.kafka.githubbasic.data.user.datasources.NetworkUserDataSource
 import com.kafka.githubbasic.domain.user.UserRepository
+import com.kafka.githubbasic.domain.user.model.RepositoryListModel
 import com.kafka.githubbasic.domain.user.model.UserListModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -45,6 +46,20 @@ class UserRepositoryImplementation @Inject constructor(
                 follower = detail.followers,
                 following = detail.following
             )
+        }
+    }
+
+    override suspend fun getRepos(username: String): Flow<List<RepositoryListModel>> {
+        return networkUserDataSource.getRepos(username).map {
+            it.map { repoDetail ->
+                RepositoryListModel(
+                    name = repoDetail.name,
+                    language = repoDetail.language ?: "",
+                    starCount = repoDetail.stargazers_count,
+                    description = repoDetail.description ?: "",
+                    url = repoDetail.html_url
+                )
+            }
         }
     }
 }
