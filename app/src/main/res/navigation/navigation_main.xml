@@ -11,6 +11,16 @@
         android:label="CONVERSION"
         tools:layout="@layout/fragment_user">
 
+        <action
+            android:id="@+id/action_fragment_user_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.kafka.githubbasic.presentation.userdetail.UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail">
     </fragment>
 
 </navigation>

@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.kafka.githubbasic.databinding.ViewtypeUserDetailsBinding
 import com.kafka.githubbasic.presentation.user.model.UserAdapterModel
 
-class UserAdapter : ListAdapter<UserAdapterModel, UserAdapter.UsersViewHolder>(object :
+class UserAdapter(
+    val onClickListener: (String) -> Unit
+) : ListAdapter<UserAdapterModel, UserAdapter.UsersViewHolder>(object :
     DiffUtil.ItemCallback<UserAdapterModel>() {
     override fun areItemsTheSame(
         oldItem: UserAdapterModel, newItem: UserAdapterModel
@@ -28,6 +30,9 @@ class UserAdapter : ListAdapter<UserAdapterModel, UserAdapter.UsersViewHolder>(o
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(userAdapterModel: UserAdapterModel) {
+            binding.llRecyclerViewItem.setOnClickListener {
+                onClickListener.invoke(userAdapterModel.userName)
+            }
             binding.tvUserName.text = userAdapterModel.userName
             // TODO add image load by glide for image
             Glide.with(itemView.context).load(userAdapterModel.avatarUrl).into(binding.ivUserDetail)
