@@ -15,6 +15,6 @@ class NetworkUserDataSource @Inject constructor(
     }
 
     suspend fun searchUsers(keyword: String): Flow<List<UserListResponseModel>> {
-        return flow { emit(userService.searchUsers(keyword)) }
+        return flow { emit(userService.searchUsers(keyword).items) }
     }
 }

@@ -21,6 +21,12 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 it.layoutManager = LinearLayoutManager(context)
                 it.adapter = userAdapter
             }
+
+            btnSearchUser.setOnClickListener {
+                etSearchUser.text?.toString()?.run {
+                    viewModel.searchUsers(this)
+                }
+            }
         }
     }
 
