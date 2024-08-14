@@ -46,15 +46,15 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
         viewModel.viewState.observe(viewLifecycleOwner) {
             when (it) {
                 is UserDetailsViewState.ErrorNetwork -> {
-
+                    // TODO handle error
                 }
 
                 is UserDetailsViewState.Idle -> {
-
+                    // TODO handle idle
                 }
 
                 is UserDetailsViewState.Loading -> {
-
+                    // TODO Handle Loading
                 }
 
                 is UserDetailsViewState.Success -> {
