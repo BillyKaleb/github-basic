@@ -21,6 +21,16 @@
         android:id="@+id/userDetailFragment"
         android:name="com.kafka.githubbasic.presentation.userdetail.UserDetailFragment"
         tools:layout="@layout/fragment_user_detail">
+
+        <action
+            android:id="@+id/action_userDetailFragment_to_webView"
+            app:destination="@id/webviewActivity" />
     </fragment>
+
+    <activity
+        android:id="@+id/webviewActivity"
+        android:name="com.kafka.githubbasic.presentation.WebViewActivity"
+        tools:layout="@layout/activity_webview">
+    </activity>
 
 </navigation>

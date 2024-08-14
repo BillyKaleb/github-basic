@@ -2,11 +2,14 @@ package com.kafka.githubbasic.presentation.userdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.kafka.githubbasic.R
 import com.kafka.githubbasic.databinding.FragmentUserDetailBinding
+import com.kafka.githubbasic.presentation.WebViewActivity
 import com.kafka.githubbasic.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +34,12 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
     }
 
     private fun openWebView(url: String) {
-        Toast.makeText(requireContext(), "Load WebView " + url, Toast.LENGTH_SHORT).show()
+        val bundle = bundleOf(
+            WebViewActivity.URL to url
+        )
+        findNavController().navigate(
+            R.id.action_userDetailFragment_to_webView, bundle
+        )
     }
 
     override fun setupObservers() {
