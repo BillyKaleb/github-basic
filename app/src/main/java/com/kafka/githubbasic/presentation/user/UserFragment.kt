@@ -3,6 +3,7 @@ package com.kafka.githubbasic.presentation.user
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kafka.githubbasic.databinding.FragmentUserBinding
 import com.kafka.githubbasic.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,15 +16,38 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     private val userAdapter by lazy { UserAdapter() }
 
     override fun setupViews() {
-        TODO("Not yet implemented")
+        binding.apply {
+            rvGithubUsers.let {
+                it.layoutManager = LinearLayoutManager(context)
+                it.adapter = userAdapter
+            }
+        }
     }
 
     override fun setupObservers() {
-        TODO("Not yet implemented")
+        viewModel.viewState.observe(viewLifecycleOwner) {
+            when (it) {
+                is UserViewState.Success -> {
+                    userAdapter.addList(it.data.listResponse)
+                }
+
+                is UserViewState.ErrorNetwork -> {
+                    // TODO Handle error
+                }
+
+                is UserViewState.Idle -> {
+                    // TODO no op yet
+                }
+
+                is UserViewState.Loading -> {
+                    // TODO add loading state
+                }
+            }
+        }
     }
 
     override fun init() {
-        TODO("Not yet implemented")
+        viewModel.getUsers()
     }
 
     override fun getViewBinding(

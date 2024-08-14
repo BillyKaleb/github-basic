@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kafka.githubbasic.databinding.ViewtypeUserDetailsBinding
 import com.kafka.githubbasic.presentation.user.model.UserAdapterModel
 
@@ -29,6 +30,7 @@ class UserAdapter : ListAdapter<UserAdapterModel, UserAdapter.UsersViewHolder>(o
         fun setData(userAdapterModel: UserAdapterModel) {
             binding.tvUserName.text = userAdapterModel.userName
             // TODO add image load by glide for image
+            Glide.with(itemView.context).load(userAdapterModel.avatarUrl).into(binding.ivUserDetail)
         }
     }
 
@@ -38,6 +40,11 @@ class UserAdapter : ListAdapter<UserAdapterModel, UserAdapter.UsersViewHolder>(o
                 LayoutInflater.from(parent.context), parent, false
             )
         )
+    }
+
+    fun addList(list: List<UserAdapterModel>?) {
+        val updatedList: List<UserAdapterModel> = currentList + list.orEmpty()
+        submitList(updatedList)
     }
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {

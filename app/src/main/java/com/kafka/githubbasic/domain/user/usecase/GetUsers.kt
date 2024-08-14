@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class GetUsers @Inject constructor(
     private val userRepository: UserRepository
-) : BaseUseCase<UserListModel, Unit>() {
+) : BaseUseCase<List<UserListModel>, Unit>() {
 
-    override suspend fun run(params: Unit): Flow<UserListModel> {
+    override suspend fun run(params: Unit): Flow<List<UserListModel>> {
         return userRepository.getUser()
     }
 }

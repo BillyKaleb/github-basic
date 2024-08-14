@@ -11,13 +11,15 @@ class UserRepositoryImplementation @Inject constructor(
     private val networkUserDataSource: NetworkUserDataSource
 ) : UserRepository {
 
-    override suspend fun getUser(): Flow<UserListModel> {
+    override suspend fun getUser(): Flow<List<UserListModel>> {
         return networkUserDataSource.getUsers().map {
-            UserListModel(
-                name = it.name,
-                id = it.id,
-                avatarUrl = it.avatar_id
-            )
+            it.map { userListResponse ->
+                UserListModel(
+                    name = userListResponse.login,
+                    id = userListResponse.id,
+                    avatarUrl = userListResponse.avatar_url
+                )
+            }
         }
     }
 }

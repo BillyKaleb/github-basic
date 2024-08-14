@@ -1,7 +1,7 @@
 package com.kafka.githubbasic.data.user.model
 
 data class UserListResponseModel(
-    val name: String,
+    val login: String,
     val id: Int,
-    val avatar_id: String
+    val avatar_url: String
 )

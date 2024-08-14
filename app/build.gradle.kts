@@ -54,6 +54,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("com.google.android.material:material:1.12.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // DI
     implementation("com.google.dagger:hilt-android:2.50")
