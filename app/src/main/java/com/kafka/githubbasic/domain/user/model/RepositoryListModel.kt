@@ -5,5 +5,6 @@ data class RepositoryListModel(
     val language: String?,
     val starCount: Int,
     val description: String?,
-    val url: String
+    val url: String,
+    val fork: Boolean
 )

@@ -57,7 +57,8 @@ class UserRepositoryImplementation @Inject constructor(
                     language = repoDetail.language,
                     starCount = repoDetail.stargazers_count,
                     description = repoDetail.description,
-                    url = repoDetail.html_url
+                    url = repoDetail.html_url,
+                    fork = repoDetail.fork
                 )
             }
         }

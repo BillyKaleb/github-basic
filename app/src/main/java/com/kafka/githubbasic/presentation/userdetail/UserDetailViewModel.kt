@@ -36,7 +36,7 @@ class UserDetailViewModel @Inject constructor(
 
     private fun getRepos(username: String) {
         getRepos.invoke(GetRepos.Params(username), viewModelScope, onResult = {
-            _viewState.value = UserDetailsViewState.SuccessLoadRepo(it.map { repositoryModel ->
+            _viewState.value = UserDetailsViewState.SuccessLoadRepo(it.filter { repo -> !repo.fork }.map { repositoryModel ->
                 UserRepoFragmentModel(
                     repositoryModel.name,
                     repositoryModel.language ?: "",

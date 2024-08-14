@@ -2,7 +2,9 @@ package com.kafka.githubbasic.presentation.userdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.kafka.githubbasic.databinding.FragmentUserDetailBinding
 import com.kafka.githubbasic.presentation.base.BaseFragment
@@ -13,8 +15,23 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
 
     private val viewModel: UserDetailViewModel by viewModels()
 
+    private val userRepoAdapter by lazy {
+        UserRepoAdapter {
+            openWebView(it)
+        }
+    }
+
     override fun setupViews() {
-        // no op
+        binding.apply {
+            rvRepository.let {
+                it.layoutManager = LinearLayoutManager(context)
+                it.adapter = userRepoAdapter
+            }
+        }
+    }
+
+    private fun openWebView(url: String) {
+        Toast.makeText(requireContext(), "Load WebView " + url, Toast.LENGTH_SHORT).show()
     }
 
     override fun setupObservers() {
@@ -47,7 +64,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
                 }
 
                 is UserDetailsViewState.SuccessLoadRepo -> {
-
+                    userRepoAdapter.submitList(it.data)
                 }
             }
         }

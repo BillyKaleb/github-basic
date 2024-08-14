@@ -5,5 +5,6 @@ data class RepositoryResponseModel(
     val language: String?,
     val stargazers_count: Int,
     val description: String?,
-    val html_url: String
+    val html_url: String,
+    val fork: Boolean
 )
