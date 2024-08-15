@@ -98,7 +98,9 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     override fun init() {
-        viewModel.getUsers()
+        if (userAdapter.currentList.isEmpty()) {
+            viewModel.getUsers()
+        }
     }
 
     override fun getViewBinding(
