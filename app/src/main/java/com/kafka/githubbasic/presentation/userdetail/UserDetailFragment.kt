@@ -2,6 +2,7 @@ package com.kafka.githubbasic.presentation.userdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -46,7 +47,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
         viewModel.viewState.observe(viewLifecycleOwner) {
             when (it) {
                 is UserDetailsViewState.ErrorNetwork -> {
-                    // TODO handle error
+                    Toast.makeText(requireContext(), it.throwable.message, Toast.LENGTH_LONG).show()
                 }
 
                 is UserDetailsViewState.Idle -> {

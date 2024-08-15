@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -78,7 +79,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 }
 
                 is UserViewState.ErrorNetwork -> {
-                    // TODO Handle error
+                    Toast.makeText(requireContext(), it.throwable.message, Toast.LENGTH_LONG).show()
                 }
 
                 is UserViewState.Idle -> {
