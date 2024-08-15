@@ -1,10 +1,12 @@
 package com.kafka.githubbasic.data.user.model
 
+import com.google.gson.annotations.SerializedName
+
 data class RepositoryResponseModel(
-    val name: String,
-    val language: String?,
-    val stargazers_count: Int,
-    val description: String?,
-    val html_url: String,
-    val fork: Boolean
+    @SerializedName("name") val name: String?,
+    @SerializedName("language") val language: String?,
+    @SerializedName("stargazers_count") val stargazersCount: Int?,
+    @SerializedName("description") val description: String?,
+    @SerializedName("html_url") val htmlUrl: String?,
+    @SerializedName("fork") val fork: Boolean
 )

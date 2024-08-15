@@ -16,9 +16,9 @@ class UserRepositoryImplementation @Inject constructor(
         return networkUserDataSource.getUsers().map {
             it.map { userListResponse ->
                 UserListModel(
-                    name = userListResponse.login,
+                    name = userListResponse.login ?: "",
                     id = userListResponse.id,
-                    avatarUrl = userListResponse.avatar_url
+                    avatarUrl = userListResponse.avatarUrl ?: ""
                 )
             }
         }
@@ -26,25 +26,25 @@ class UserRepositoryImplementation @Inject constructor(
 
     override suspend fun searchUser(keyword: String): Flow<List<UserListModel>> {
         return networkUserDataSource.searchUsers(keyword).map {
-            it.map { userListResponse ->
+            it.items?.map { userListResponse ->
                 UserListModel(
-                    name = userListResponse.login,
+                    name = userListResponse.login ?: "",
                     id = userListResponse.id,
-                    avatarUrl = userListResponse.avatar_url
+                    avatarUrl = userListResponse.avatarUrl ?: ""
                 )
-            }
+            } ?: emptyList()
         }
     }
 
     override suspend fun getUserDetails(username: String): Flow<UserListModel> {
         return networkUserDataSource.getUserDetails(username).map { detail ->
             UserListModel(
-                name = detail.login,
+                name = detail.login ?: "",
                 id = detail.id,
-                avatarUrl = detail.avatar_url,
-                fullname = detail.name,
-                follower = detail.followers,
-                following = detail.following
+                avatarUrl = detail.avatarUrl ?: "",
+                fullname = detail.name ?: "",
+                follower = detail.followerCount ?: 0,
+                following = detail.followingCount ?: 0
             )
         }
     }
@@ -53,11 +53,11 @@ class UserRepositoryImplementation @Inject constructor(
         return networkUserDataSource.getRepos(username).map {
             it.map { repoDetail ->
                 RepositoryListModel(
-                    name = repoDetail.name,
+                    name = repoDetail.name ?: "",
                     language = repoDetail.language,
-                    starCount = repoDetail.stargazers_count,
+                    starCount = repoDetail.stargazersCount ?: 0,
                     description = repoDetail.description,
-                    url = repoDetail.html_url,
+                    url = repoDetail.htmlUrl ?: "",
                     fork = repoDetail.fork
                 )
             }
