@@ -34,7 +34,6 @@ class UserAdapter(
                 onClickListener.invoke(userAdapterModel.userName)
             }
             binding.tvUserName.text = userAdapterModel.userName
-            // TODO add image load by glide for image
             Glide.with(itemView.context).load(userAdapterModel.avatarUrl).into(binding.ivUserDetail)
         }
     }

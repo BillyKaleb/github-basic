@@ -1,10 +1,12 @@
 package com.kafka.githubbasic.presentation.userdetail
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kafka.githubbasic.R
 import com.kafka.githubbasic.databinding.ViewtypeUserRepoBinding
 import com.kafka.githubbasic.presentation.userdetail.model.UserRepoFragmentModel
 
@@ -32,12 +34,24 @@ class UserRepoAdapter(
             binding.llRecyclerViewItem.setOnClickListener {
                 onClickListener.invoke(userRepoModel.url)
             }
+
             binding.tvRepoName.text = userRepoModel.name
-            if (userRepoModel.language.isNotEmpty()) {
-                binding.tvRepoLanguage.text = "Language: ${userRepoModel.language}"
+
+            binding.tvRepoLanguage.text =
+                itemView.context.getString(
+                    R.string.repo_language,
+                    userRepoModel.language ?: "Unknown"
+                )
+
+            binding.tvStarsNumber.text =
+                itemView.context.getString(R.string.repo_stars, userRepoModel.starCount.toString())
+
+            userRepoModel.description?.run {
+                binding.tvDescription.text =
+                    itemView.context.getString(R.string.repo_desc, this)
+            } ?: {
+                binding.tvDescription.visibility = View.GONE
             }
-            binding.tvStarsNumber.text = "Stars: ${userRepoModel.starCount}"
-            binding.tvDescription.text = "Desc: ${userRepoModel.description}"
         }
     }
 

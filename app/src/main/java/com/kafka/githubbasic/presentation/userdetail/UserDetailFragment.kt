@@ -60,10 +60,26 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>() {
                 is UserDetailsViewState.Success -> {
                     binding.run {
                         it.data.let { userDetail ->
-                            tvDetailUserName.text = "Username: ${userDetail.name}"
-                            tvDetailFullName.text = "Fullname: ${userDetail.fullname}"
-                            tvDetailFollower.text = "Follower: ${userDetail.follower}"
-                            tvDetailFollowing.text = "Following: ${userDetail.following}"
+                            tvDetailUserName.text = getString(
+                                R.string.user_detail_username_textview,
+                                userDetail.name
+                            )
+
+                            tvDetailFullName.text = getString(
+                                R.string.user_detail_fullname_textview,
+                                userDetail.fullname
+                            )
+
+                            tvDetailFollower.text = getString(
+                                R.string.user_detail_follower_textview,
+                                userDetail.follower.toString()
+                            )
+
+                            tvDetailFollowing.text = getString(
+                                R.string.user_detail_following_textview,
+                                userDetail.following.toString()
+                            )
+
                             Glide.with(requireContext())
                                 .load(userDetail.avatarUrl)
                                 .into(ivUserDetail)

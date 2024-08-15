@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GithubBasic</string>
+    <string name="repo_language">Language: %1$s</string>
+    <string name="repo_stars">Stars: %1$s</string>
+    <string name="repo_desc">Desc: %1$s</string>
+    <string name="search_bar_user_hint">Search User</string>
+    <string name="search_button_text">Search</string>
+    <string name="user_detail_username_textview">Username: %1$s</string>
+    <string name="user_detail_fullname_textview">Fullname: %1$s</string>
+    <string name="user_detail_follower_textview">Follower: %1$s</string>
+    <string name="user_detail_following_textview">Following: %1$s</string>
 </resources>
