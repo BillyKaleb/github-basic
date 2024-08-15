@@ -1,7 +1,11 @@
 package com.kafka.githubbasic.presentation.user
 
+import android.content.Context
+import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +15,7 @@ import com.kafka.githubbasic.databinding.FragmentUserBinding
 import com.kafka.githubbasic.presentation.base.BaseFragment
 import com.kafka.githubbasic.presentation.userdetail.UserDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentUserBinding>() {
@@ -41,10 +46,28 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
             btnSearchUser.setOnClickListener {
                 etSearchUser.text?.toString()?.run {
-                    viewModel.searchUsers(this)
+                    doSearchFromSearchBar(etSearchUser, this)
                 }
             }
+
+            etSearchUser.setOnKeyListener { _, keyCode, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    etSearchUser.text?.toString()?.run {
+                        doSearchFromSearchBar(etSearchUser, this)
+                    }
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
+            }
         }
+    }
+
+    private fun doSearchFromSearchBar(view: View, keyword: String) {
+        view.clearFocus()
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+        viewModel.searchUsers(keyword)
     }
 
     override fun setupObservers() {
